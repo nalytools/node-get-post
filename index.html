@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html>
+<title> Node example - get </title>
+
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+<script src="print.js"></script>
+
+
+</script>
+
+<!-- <img src="xmas-playera.jpg" /> -->
+
+<script>
+
+
+	$(document).ready(function(){
+		$("#btnSubmit").click(function(){
+
+			var locationNames = $("#txtLocationName").val();
+			
+			//Enviar cadena en JSON
+			$.post('/miPost', {"locationName": locationNames}, function(response, status){
+				alert(response);
+			}); //end post		
+		}); //end btnSubmit
+		
+		$("#btnGet").click(function(){
+			$.get('/miGet', function(data){
+				for(var i = 0; i < data.length; i++)
+				{
+					$("#miParrafo").append(data[i].LocationID + " " + data[i].LocationName + "<br>");
+				}
+				//$("#miParrafo").append(data + "<br>");
+			}); //end get
+		}); //end btnGet
+	}); //end ready
+</script>
+</head>
+
+<body>
+
+<label> Location Name: </label>
+<input type = "text" id = "txtLocationName"/> <br>
+
+<button id = "btnSubmit"> Submit </button>
+<button id = "btnGet"> Get </button>
+
+<p id = "miParrafo"> </p>
+</body>
+</html>
